@@ -1,9 +1,8 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { VolcanoCoinHw4 } from "../typechain-types/VolcanoCoin_hw4.sol";
+import { VolcanoCoinHw4 } from "../src/types";
 
 async function main() {
-  let contractTyped: VolcanoCoinHw4;
   const Factory = await ethers.getContractFactory("VolcanoCoinHw4");
 
   const contract = (await Factory.deploy()) as VolcanoCoinHw4;
