@@ -1,11 +1,12 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
+import { VolcanoCoinHw4 } from "../typechain-types/VolcanoCoin_hw4.sol";
 
 async function main() {
-
+  let contractTyped: VolcanoCoinHw4;
   const Factory = await ethers.getContractFactory("VolcanoCoinHw4");
 
-  const contract: ethers.Contract = await Factory.deploy();
+  const contract = (await Factory.deploy()) as VolcanoCoinHw4;
 
   console.log("Deploying contract");
   await contract.deployed();
@@ -15,7 +16,7 @@ async function main() {
   const [deployer, otherAccount] = await ethers.getSigners();
 
 
-  expect((await contract.getTotalSupply()) == 10000);
+  expect((await contract.getTotalSupply()).eq(ethers.BigNumber.from("11000")));
   // lets mint another 1,000 tokens to deployer
   console.log("Calling function using deployer");
   const tx = await contract.mint();
@@ -28,7 +29,7 @@ async function main() {
     .withArgs(11000);
 
   const balanceDeployer = await contract.getBalance(deployer.address);
-  expect(balanceDeployer == 11000);
+  expect(balanceDeployer.eq(ethers.BigNumber.from("11000")));
 
   // Test other account cannot call mint
   await expect(contract.connect(otherAccount)
@@ -43,11 +44,11 @@ async function main() {
 
 
   // Call balance of other account
-  expect((await contract.getBalance(deployer.address)) == 1000);
+  expect((await contract.getBalance(deployer.address)).eq(ethers.BigNumber.from("1000")));
 
   // Check if payments was updated
   const payments = await contract.getPayments(deployer.address);
-  expect(payments[0].amount == ethers.BigNumber.from("1000"));
+  expect(payments[0].amount.eq(ethers.BigNumber.from("1000")));
   expect(payments[0].recipient == otherAccount.address);
 }
 
