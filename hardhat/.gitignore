@@ -7,6 +7,13 @@ typechain
 typechain-types
 src/types
 
+# Foundry
+.DS_STORE
+/target
+out/
+out.json
+forge-cache
+
 #Hardhat files
 cache
 artifacts
