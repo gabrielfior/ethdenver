@@ -11,3 +11,12 @@ REPORT_GAS=true npx hardhat test
 npx hardhat node
 npx hardhat run scripts/deploy.ts
 ```
+
+For visualizing the documentation:
+> - Install [mkdocs](https://www.mkdocs.org/)
+> Run ```npx hardhat docgen``` 
+> Start mkdocs server: 
+>> - ```cd docs```
+>> - ```mkocs serve```
+>> - Go to ```localhost:8000```
+>> ![](images/docgen_example.png)

@@ -4,8 +4,8 @@ import "@nomicfoundation/hardhat-chai-matchers";
 import 'hardhat-deploy';
 import '@nomiclabs/hardhat-ethers';
 import "hardhat-gas-reporter";
-//import dotenv from 'dotenv';
-//dotenv.config();
+import "@nomiclabs/hardhat-vyper";
+import 'solidity-docgen';
 require('dotenv').config({ path: __dirname + '/.env' });
 
 const ALCHEMY_API_KEY = process.env.ALCHEMY_API_KEY;
@@ -34,6 +34,13 @@ const config: HardhatUserConfig = {
       },
     ],
   },
+  docgen: {
+    outputDir: './docs/docs',
+    pages: 'items'
+  },
+  vyper: {
+    version: "0.2.4",
+  },
   namedAccounts: {
     deployer: 0,
     tokenOwner: 1,
@@ -44,6 +51,10 @@ const config: HardhatUserConfig = {
     },
     goerli: {
       url: `https://eth-goerli.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
+      accounts: [GOERLI_PRIVATE_KEY]
+    },
+    mainnet: {
+      url: `https://eth-mainnet.g.alchemy.com/v2/6uf6lmLfBbzsWQaxewqSP3F49U0s9BqR`,
       accounts: [GOERLI_PRIVATE_KEY]
     }
   },

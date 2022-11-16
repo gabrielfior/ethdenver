@@ -18,3 +18,6 @@ forge-cache
 cache
 artifacts
 
+# docgen
+docs/docs/
+

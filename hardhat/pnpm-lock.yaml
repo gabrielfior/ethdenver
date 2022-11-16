@@ -4,6 +4,7 @@ specifiers:
   '@nomicfoundation/hardhat-chai-matchers': ^1.0.4
   '@nomicfoundation/hardhat-toolbox': ^2.0.0
   '@nomiclabs/hardhat-ethers': npm:hardhat-deploy-ethers@0.3.0-beta.13
+  '@nomiclabs/hardhat-vyper': ^3.0.1
   '@openzeppelin/contracts': ^4.7.3
   chai: ^4.2.0
   dotenv: ^16.0.3
@@ -12,6 +13,7 @@ specifiers:
   hardhat-deploy: ^0.11.20
   hardhat-deploy-ethers: ^0.3.0-beta.13
   hardhat-gas-reporter: ^1.0.9
+  solidity-docgen: 0.6.0-beta.30
 
 dependencies:
   '@openzeppelin/contracts': 4.7.3
@@ -21,12 +23,14 @@ devDependencies:
   '@nomicfoundation/hardhat-chai-matchers': 1.0.4_a34sm3ti6niapbfvndzae3aopu
   '@nomicfoundation/hardhat-toolbox': 2.0.0_zrdrjjbasrmhedd2ymo72nh7sm
   '@nomiclabs/hardhat-ethers': /hardhat-deploy-ethers/0.3.0-beta.13_rio3alvrwqjfrtzrxzvizw4x7e
+  '@nomiclabs/hardhat-vyper': 3.0.1_hardhat@2.12.0
   chai: 4.3.6
   ethers: 5.7.2
   hardhat: 2.12.0_mwhvu7sfp6vq5ryuwb6hlbjfka
   hardhat-deploy: 0.11.20
   hardhat-deploy-ethers: 0.3.0-beta.13_rio3alvrwqjfrtzrxzvizw4x7e
   hardhat-gas-reporter: 1.0.9_hardhat@2.12.0
+  solidity-docgen: 0.6.0-beta.30_hardhat@2.12.0
 
 packages:
 
@@ -742,6 +746,21 @@ packages:
       semver: 6.3.0
       table: 6.8.0
       undici: 5.11.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /@nomiclabs/hardhat-vyper/3.0.1_hardhat@2.12.0:
+    resolution: {integrity: sha512-FpRBxbOqLWg1n44qsBLWbvw09LVA2U7r7D1M0IsNpMe9QRa/aRYlRh8ine8Fr2KQl+k/NMZDZD4AKSKGPfm7lg==}
+    peerDependencies:
+      hardhat: ^2.8.3
+    dependencies:
+      debug: 4.3.4
+      fs-extra: 7.0.1
+      hardhat: 2.12.0_mwhvu7sfp6vq5ryuwb6hlbjfka
+      io-ts: 1.10.4
+      lodash: 4.17.21
+      semver: 6.3.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4134,6 +4153,10 @@ packages:
       - debug
     dev: true
 
+  /solidity-ast/0.4.38:
+    resolution: {integrity: sha512-e7gT6g8l8M2rAzH648QA3/IihCNy/anFoWyChVD+T+zfX4FjXbT8AO2DB3wG1iEmIBib9/+vD+GvTElWWpdw+w==}
+    dev: true
+
   /solidity-coverage/0.8.2_hardhat@2.12.0:
     resolution: {integrity: sha512-cv2bWb7lOXPE9/SSleDO6czkFiMHgP4NXPj+iW9W7iEKLBk7Cj0AGBiNmGX3V1totl9wjPrT0gHmABZKZt65rQ==}
     hasBin: true
@@ -4163,6 +4186,16 @@ packages:
       web3-utils: 1.8.0
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /solidity-docgen/0.6.0-beta.30_hardhat@2.12.0:
+    resolution: {integrity: sha512-CfwhhM/hQIWm0LHyUIJse4Lz4kR+VahBfns5Z0l7l+2V3Emv8LNIG8a6aM1+r0k49iOVfO1xyFaJyXFS1UD8cA==}
+    peerDependencies:
+      hardhat: ^2.8.0
+    dependencies:
+      handlebars: 4.7.7
+      hardhat: 2.12.0_mwhvu7sfp6vq5ryuwb6hlbjfka
+      solidity-ast: 0.4.38
     dev: true
 
   /source-map-support/0.5.21:
