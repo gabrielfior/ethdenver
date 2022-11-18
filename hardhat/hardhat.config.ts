@@ -10,6 +10,7 @@ require('dotenv').config({ path: __dirname + '/.env' });
 
 const ALCHEMY_API_KEY = process.env.ALCHEMY_API_KEY;
 const GOERLI_PRIVATE_KEY = process.env.GOERLI_PRIVATE_KEY ?? "abc";
+const ALCHEMY_API_KEY_MAINNET = process.env.ALCHEMY_API_KEY_MAINNET;
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -46,6 +47,11 @@ const config: HardhatUserConfig = {
     tokenOwner: 1,
   },
   networks: {
+    hardhat: {
+      forking: {
+        url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_API_KEY_MAINNET}`
+      }
+    },
     localhost: {
       url: "http://127.0.0.1:8545"
     },
@@ -59,7 +65,7 @@ const config: HardhatUserConfig = {
     }
   },
   gasReporter: {
-    enabled: true,
+    enabled: (process.env.REPORT_GAS) ? true : false,
     currency: "USD"
   },
   typechain: {
