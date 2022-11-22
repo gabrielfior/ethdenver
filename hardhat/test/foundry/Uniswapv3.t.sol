@@ -6,11 +6,13 @@ import "forge-std/console.sol";
 import "@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol";
 import "@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@prb/math/contracts/PRBMathUD60x18.sol";
 
 /// @title An ERC-20 compatible ShameCoin.
 /// @author Gabriel Fior
 /// @dev Functions deviate from ERC20, see specific comments on each function.
 contract Uniswapv3Test is Test {
+    using PRBMathUD60x18 for uint256;
     //using PoolAddress for address;
     ISwapRouter public swapRouter;
     IERC20 public dai;
@@ -40,10 +42,17 @@ contract Uniswapv3Test is Test {
         address binanceUser = 0xDFd5293D8e347dFe59E90eFd55b2956a1343963d;
         vm.startPrank(binanceUser);
 
-        dai.approve(address(this), 1000 * 1e18);
-        console.log("approved");
+        uint256 originalBalanceDAI = IERC20(DAI).balanceOf(binanceUser);
+        console.log(
+            "original balance DAI user",
+            originalBalanceDAI
+        );
 
-        uint256 amountIn = 1e18;        
+        uint256 amountIn = PRBMathUD60x18.fromUint(250);
+        console.log('amountIn', amountIn);
+
+        dai.approve(address(this), amountIn); // authorize spender
+        console.log("approved");
 
         // Approve the router to spend DAI.
         TransferHelper.safeApprove(DAI, address(swapRouter), amountIn);
@@ -54,7 +63,7 @@ contract Uniswapv3Test is Test {
                 tokenIn: DAI,
                 tokenOut: USDC,
                 fee: poolFeeDAIUSDC,
-                recipient: luckyUser,
+                recipient: luckyUser, // recipient
                 deadline: block.timestamp + 10,
                 amountIn: amountIn,
                 amountOutMinimum: 0,
@@ -86,7 +95,7 @@ contract Uniswapv3Test is Test {
         dai.approve(address(this), 1000 * 1e18);
         console.log("approved");
 
-        uint256 amountIn = 1e18;        
+        uint256 amountIn = PRBMathUD60x18.fromUint(500);    
 
         // Approve the router to spend DAI.
         TransferHelper.safeApprove(DAI, address(swapRouter), amountIn);
